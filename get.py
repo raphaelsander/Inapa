@@ -8,9 +8,9 @@
 from mechanize import Browser
 from bs4 import BeautifulSoup
 
-def get_data(matr, senha, curso):
+def get_provas(matr, senha, curso):
 
-    URL = "https://siteseguro.inatel.br/PortalAcademico/Academico/Sra/WebNotas.aspx"
+    URL = "https://siteseguro.inatel.br/PortalAcademico/Academico/Sra/WebListarHorariosProva.aspx"
 
     br = Browser()
     br.open(URL)
@@ -40,4 +40,19 @@ def get_data(matr, senha, curso):
 
     response = br.submit(name='ctl00$Corpo$TabAcessoLogin$TabAluno$LogOn$LoginButton')
 
-    print response.read()
+    dados = response.read()
+
+    soup = BeautifulSoup(dados, 'html.parser')
+
+    soup2 = soup.find(id='ctl00_Corpo_UCCalendarioProvas1_GridDados')
+    all_td = soup2.find_all("td")
+    lista_provas = []
+
+    for lista_provas_texto in all_td:
+        lista_provas.append(lista_provas_texto.get_text())
+
+    return lista_provas
+
+
+
+
