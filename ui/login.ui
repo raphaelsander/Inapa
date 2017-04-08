@@ -121,7 +121,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>Projetos/App Acadêmico Inatel/ui/logo.svg</pixmap>
+    <pixmap>ui/logo.svg</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -200,7 +200,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>Projetos/App Acadêmico Inatel/ui/loading.gif</pixmap>
+    <pixmap>ui/loading.gif</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
