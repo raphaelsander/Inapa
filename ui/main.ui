@@ -51,7 +51,7 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>9</x>
         <y>10</y>
         <width>681</width>
         <height>351</height>
@@ -61,7 +61,7 @@
        <bool>false</bool>
       </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>100</number>
+       <number>95</number>
       </attribute>
       <attribute name="horizontalHeaderHighlightSections">
        <bool>true</bool>
@@ -85,10 +85,16 @@
        <property name="text">
         <string>Aluno</string>
        </property>
+       <property name="textAlignment">
+        <set>AlignJustify|AlignVCenter</set>
+       </property>
       </column>
       <column>
        <property name="text">
         <string>Data</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignJustify|AlignVCenter</set>
        </property>
       </column>
       <column>
@@ -100,20 +106,32 @@
        <property name="text">
         <string>Turma</string>
        </property>
+       <property name="textAlignment">
+        <set>AlignJustify|AlignVCenter</set>
+       </property>
       </column>
       <column>
        <property name="text">
         <string>Prova</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignJustify|AlignVCenter</set>
        </property>
       </column>
       <column>
        <property name="text">
         <string>Horário</string>
        </property>
+       <property name="textAlignment">
+        <set>AlignJustify|AlignVCenter</set>
+       </property>
       </column>
       <column>
        <property name="text">
         <string>Local</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignJustify|AlignVCenter</set>
        </property>
       </column>
      </widget>
@@ -144,7 +162,7 @@
      <x>0</x>
      <y>0</y>
      <width>721</width>
-     <height>25</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">
