@@ -1,0 +1,10 @@
+1-
+
+Traceback (most recent call last):
+  File "/home/raphael/Projetos/Inapa/main.py", line 38, in on_pushButton_pressed
+    hey.exec_()
+AttributeError: 'Main' object has no attribute 'exec_'
+
+2-
+
+GIF loading não estão sendo exibido quando clicado no botão de login.
