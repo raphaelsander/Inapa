@@ -18,7 +18,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>320</y>
+     <y>300</y>
      <width>121</width>
      <height>28</height>
     </rect>
@@ -181,10 +181,10 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>380</y>
-     <width>61</width>
-     <height>61</height>
+     <x>100</x>
+     <y>350</y>
+     <width>128</width>
+     <height>128</height>
     </rect>
    </property>
    <property name="focusPolicy">
@@ -223,17 +223,17 @@
  <connections>
   <connection>
    <sender>pushButton</sender>
-   <signal>clicked()</signal>
+   <signal>pressed()</signal>
    <receiver>label_4</receiver>
-   <slot>raise()</slot>
+   <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>170</x>
-     <y>333</y>
+     <y>313</y>
     </hint>
     <hint type="destinationlabel">
-     <x>170</x>
-     <y>410</y>
+     <x>163</x>
+     <y>413</y>
     </hint>
    </hints>
   </connection>
