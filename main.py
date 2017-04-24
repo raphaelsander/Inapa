@@ -11,7 +11,7 @@ Ui_LoginWindow, QLoginWindow = loadUiType('ui/login.ui')
 
 class Login(QLoginWindow, Ui_LoginWindow):
     def __init__(self):
-        super(Login, self).__init__(None)
+        QLoginWindow.__init__(self)
         self.setupUi(self)
 
         self.label_4.hide()
@@ -46,15 +46,17 @@ class Login(QLoginWindow, Ui_LoginWindow):
             self.curso = "31"
 
     def on_pushButton_pressed(self):
+        self.label_4.show()
         hey = Main(self.matr, self.senha, self.curso)
         hey.provas()
+        hey.horario()
         hey.show()
         login.hide()
-        return app.exec_()
+        hey.exec_()
 
 class Main(QMainWindow, Ui_MainWindow):
-    def __init__(self, matr, senha, curso, parent=None):
-        super(Main, self).__init__(parent)
+    def __init__(self, matr, senha, curso):
+        QMainWindow.__init__(self)
         self.setupUi(self)
 
         self.matr = matr
@@ -80,10 +82,26 @@ class Main(QMainWindow, Ui_MainWindow):
             if cont == 7:
                 cont2 = cont2 + 1
                 cont = 0
-        self.tableWidget.update()
+
+    def horario(self):
+
+        lista_horario = get_horario(self.matr, self.senha, self.curso)
+
+        cont = cont2 = 0
+
+        for iten in lista_horario:
+            item = QtGui.QTableWidgetItem()
+            self.tableWidget_2.setItem(cont2, cont, item)
+            item.setText("%s" % iten)
+
+            cont = cont + 1
+
+            if cont == 6:
+                cont2 = cont2 + 1
+                cont = 0
 
 if __name__ == '__main__' :
-	app = QtGui.QApplication(sys.argv)
+	app = QtGui.QApplication([])
 	login = Login()
 	login.show()
 	app.exec_()
