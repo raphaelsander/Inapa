@@ -42,7 +42,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -140,6 +140,126 @@
      <attribute name="title">
       <string>Horário</string>
      </attribute>
+     <widget class="QTableWidget" name="tableWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>681</width>
+        <height>351</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>07:00 - 07:50</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>08:00 - 08:50</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>08:50 - 09:40</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>10:00 - 10:50</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>10:50 - 11:40</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>13:30 - 14:20</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>14:20 - 15:10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>15:30 - 16:20</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>16:20 - 17:10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>17:30 - 18:20</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>18:20 - 19:10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>19:30 - 20:20</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>20:20 - 21:10</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>21:30 - 22:20</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>22:20 - 23:10</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>Segunda</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Terça</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quarta</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quinta</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Sexta</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Sábado</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+     </widget>
     </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
