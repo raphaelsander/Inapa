@@ -12,7 +12,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Portal Acadêmico</string>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
@@ -35,6 +35,12 @@
      <width>171</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>4</number>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_2">
