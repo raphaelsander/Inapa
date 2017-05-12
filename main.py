@@ -2,25 +2,26 @@
 #-*- coding: utf-8 -*-
 
 import sys
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from PyQt4.uic import loadUiType
+import threading
 from get import *
 
 Ui_MainWindow, QMainWindow = loadUiType('ui/main.ui')
 Ui_LoginWindow, QLoginWindow = loadUiType('ui/login.ui')
 
 class Login(QLoginWindow, Ui_LoginWindow):
-    def __init__(self):
-        QLoginWindow.__init__(self)
+    def __init__(self, parent=None):
+        QLoginWindow.__init__(self, parent)
         self.setupUi(self)
 
-        self.label_4.hide()
-        self.gif_loading = QtGui.QMovie("ui/loading.gif")
-        self.label_4.setMovie(self.gif_loading)
-        self.gif_loading.start()
+        self.curso = "1"
+        self.matr = ""
+        self.senha = ""
 
     def on_lineEdit_textEdited(self, text):
         self.matr = text
+        print(self.matr)
 
     def on_lineEdit_2_textEdited(self, text):
         self.senha = text
@@ -46,25 +47,52 @@ class Login(QLoginWindow, Ui_LoginWindow):
             self.curso = "31"
 
     def on_pushButton_pressed(self):
-        self.label_4.show()
-        hey = Main(self.matr, self.senha, self.curso)
-        hey.provas()
-        hey.horario()
-        hey.show()
-        login.hide()
-        hey.exec_()
+
+        # Bloco UTF8 para setar o texto corretamente no software.
+        try:
+            _fromUtf8 = QtCore.QString.fromUtf8
+        except AttributeError:
+            def _fromUtf8(s):
+                return s
+
+        if self.matr == "":
+            if self.senha == "":
+                self.label_6.setText(_fromUtf8("Preencha o número de matrícula e a senha."))
+                self.frame.raise_()
+            else:
+                self.label_6.setText(_fromUtf8("Preencha o número de matrícula."))
+                self.frame.raise_()
+
+        if self.senha == "":
+            if self.matr != "":
+                self.label_6.setText(_fromUtf8("Preencha a senha."))
+                self.frame.raise_()
+
+        if self.senha and self.matr != "":
+            self.principal = Main(self.matr, self.senha, self.curso)
+
+            # Nesse esquema de threading é obrigatório passar dois argumentos na tupla.
+            threading._start_new_thread(self.principal.horario, ("Thread Horario", 1))
+            threading._start_new_thread(self.principal.provas, ("Thread Provas", 2))
+
+            self.principal.show()
+
+            login.hide()
+
+            # ID de erro no Login ctl00_Corpo_lblErro
 
 class Main(QMainWindow, Ui_MainWindow):
-    def __init__(self, matr, senha, curso):
-        QMainWindow.__init__(self)
+    def __init__(self, matr, senha, curso, parent=None):
+        QMainWindow.__init__(self, parent)
         self.setupUi(self)
+
+        #Thread.__init__(self)
 
         self.matr = matr
         self.senha = senha
         self.curso = curso
 
-    def provas(self):
-
+    def provas(self, th, num):
         lista_provas = get_provas(self.matr, self.senha, self.curso)
 
         num_itens = len(lista_provas)/7
@@ -83,8 +111,7 @@ class Main(QMainWindow, Ui_MainWindow):
                 cont2 = cont2 + 1
                 cont = 0
 
-    def horario(self):
-
+    def horario(self, th, num):
         lista_horario = get_horario(self.matr, self.senha, self.curso)
 
         cont = cont2 = 0
@@ -101,7 +128,8 @@ class Main(QMainWindow, Ui_MainWindow):
                 cont = 0
 
 if __name__ == '__main__' :
-	app = QtGui.QApplication([])
-	login = Login()
-	login.show()
-	app.exec_()
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    login = Login()
+    login.show()
+    sys.exit(app.exec_())
