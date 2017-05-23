@@ -1,11 +1,12 @@
 #!/usr/bin/python2.7
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import sys
 from PyQt4 import QtGui, QtCore
 from PyQt4.uic import loadUiType
 import threading
 from get import *
+from verify_login import *
 
 Ui_MainWindow, QMainWindow = loadUiType('ui/main.ui')
 Ui_LoginWindow, QLoginWindow = loadUiType('ui/login.ui')
@@ -21,10 +22,11 @@ class Login(QLoginWindow, Ui_LoginWindow):
 
     def on_lineEdit_textEdited(self, text):
         self.matr = text
-        print(self.matr)
+        self.frame.lower()
 
     def on_lineEdit_2_textEdited(self, text):
         self.senha = text
+        self.frame.lower()
 
     def on_comboBox_currentIndexChanged(self, int):
         if int == 0:
@@ -69,24 +71,25 @@ class Login(QLoginWindow, Ui_LoginWindow):
                 self.frame.raise_()
 
         if self.senha and self.matr != "":
-            self.principal = Main(self.matr, self.senha, self.curso)
+            if verify(self.curso, self.matr, self.senha) == True:
+                self.principal = Main(self.matr, self.senha, self.curso)
 
-            # Nesse esquema de threading é obrigatório passar dois argumentos na tupla.
-            threading._start_new_thread(self.principal.horario, ("Thread Horario", 1))
-            threading._start_new_thread(self.principal.provas, ("Thread Provas", 2))
+                # Nesse esquema de threading é obrigatório passar dois argumentos na tupla.
+                threading._start_new_thread(self.principal.horario, ("Thread Horario", 1))
+                threading._start_new_thread(self.principal.provas, ("Thread Provas", 2))
 
-            self.principal.show()
+                self.principal.show()
 
-            login.hide()
+                login.hide()
 
-            # ID de erro no Login ctl00_Corpo_lblErro
+            else:
+                self.label_6.setText(_fromUtf8("Dados de login incorretos!"))
+                self.frame.raise_()
 
 class Main(QMainWindow, Ui_MainWindow):
     def __init__(self, matr, senha, curso, parent=None):
         QMainWindow.__init__(self, parent)
         self.setupUi(self)
-
-        #Thread.__init__(self)
 
         self.matr = matr
         self.senha = senha
