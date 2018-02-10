@@ -77,6 +77,7 @@ class Login(QLoginWindow, Ui_LoginWindow):
                 # Nesse esquema de threading é obrigatório passar dois argumentos na tupla.
                 threading._start_new_thread(self.principal.horario, ("Thread Horario", 1))
                 threading._start_new_thread(self.principal.provas, ("Thread Provas", 2))
+                threading._start_new_thread(self.principal.historico, ("Thread Historico", 3))
 
                 self.principal.show()
 
@@ -127,6 +128,25 @@ class Main(QMainWindow, Ui_MainWindow):
             cont = cont + 1
 
             if cont == 6:
+                cont2 = cont2 + 1
+                cont = 0
+
+    def historico(self, th, num):
+        lista_historico = get_historico(self.matr, self.senha, self.curso)
+
+        num_itens = len(lista_historico) / 4
+        self.tableWidget_3.setRowCount(num_itens)
+
+        cont = cont2 = 0
+
+        for iten in lista_historico:
+            item = QtGui.QTableWidgetItem()
+            self.tableWidget_3.setItem(cont2, cont, item)
+            item.setText("%s" % iten)
+
+            cont = cont + 1
+
+            if cont == 4:
                 cont2 = cont2 + 1
                 cont = 0
 

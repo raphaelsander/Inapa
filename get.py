@@ -94,3 +94,37 @@ def get_horario(matr, senha, curso):
 		lista_horario.append(aux[17 + (19 * x)])
 
 	return lista_horario
+
+def get_historico(matr, senha, curso):
+
+	URL = "https://siteseguro.inatel.br/PortalAcademico/Academico/Sra/WebHistorico.aspx"
+
+	br = Browser()
+	br.set_handle_robots(False)
+	br.open(URL)
+
+	br.set_handle_robots(False)
+
+	br.select_form('aspnetForm')
+	br.addheaders = [('User-agent',
+					  'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+
+	br.form['ctl00$Corpo$TabAcessoLogin$TabAluno$LogOn$tbMatricula'] = matr
+	br.form['ctl00$Corpo$TabAcessoLogin$TabAluno$LogOn$Password'] = senha
+	br.form['ctl00$Corpo$TabAcessoLogin$TabAluno$LogOn$dropSubCurso'] = [curso]
+
+	response = br.submit(name='ctl00$Corpo$TabAcessoLogin$TabAluno$LogOn$LoginButton')
+
+	dados = response.read()
+
+	soup = BeautifulSoup(dados, 'html.parser')
+
+	soup2 = soup.find(id='ctl00_Corpo_UCHistorico1_historicoGridView')
+
+	all_td = soup2.find_all("td")
+	lista_historico = []
+
+	for var in all_td:
+		lista_historico.append(var.get_text())
+
+	return lista_historico
